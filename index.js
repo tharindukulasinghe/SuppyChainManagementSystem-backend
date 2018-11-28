@@ -1,17 +1,20 @@
 const express = require("express");
 const app = express();
-const mysql = require("mysql");
+const bodyParser = require("body-parser");
 const port = 3000 || process.env.port;
+const users = require("./routes/user");
+const database = require("./database/db");
 
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "supplychainmanagement"
-});
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use("/users", users);
 
-connection.connect(err => {
-  console.log(err);
+database.connect(function(err) {
+  if (err) {
+    console.error("error connecting: " + err.stack);
+    return;
+  }
+  console.log("connected as id " + database.threadId);
 });
 
 app.listen(port, () => {
