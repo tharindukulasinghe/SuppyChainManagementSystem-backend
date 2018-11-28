@@ -2,11 +2,13 @@ const express = require("express");
 const router = express.Router();
 const database = require("../database/db");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
+
+router.use(cors());
 
 router.post("/login", (req, res) => {
   var appData = {};
   var input = { email: req.body.email, password: req.body.password };
-  //console.log("hi");
   console.log(input);
 
   database.query("SELECT * FROM users WHERE email = ?", input.email, function(
