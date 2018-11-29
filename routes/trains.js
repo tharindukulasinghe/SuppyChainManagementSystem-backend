@@ -12,8 +12,8 @@ router.get("/all", (req, res) => {
   database.query("SELECT * from train_schedules", (err, rows, fields) => {
     if (err) {
       appData.error = 1;
-      appData["data"] = "Error Occured!";
-      res.status(400).json(appData);
+      appData["data"] = err;
+      res.status(200).json(appData);
     } else {
       appData.error = 0;
       appData["data"] = rows;
