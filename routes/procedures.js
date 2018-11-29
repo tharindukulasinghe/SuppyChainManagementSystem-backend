@@ -54,4 +54,45 @@ router.get("/find_item_with_most_orders", (req, res) => {
   });
 });
 
+router.get("/view_orders", (req, res) => {
+  var id = req.query.id;
+
+  var sql = `CALL view_orders(${id})`;
+
+  database.query(sql, true, (error, results, fields) => {
+    if (error) {
+      return console.error(error.message);
+    }
+    //console.log(results[0]);
+    res.status(200).json(results);
+  });
+});
+
+router.get("/view_orders", (req, res) => {
+  var id = req.query.id;
+
+  var sql = `CALL view_orders(${id})`;
+
+  database.query(sql, true, (error, results, fields) => {
+    if (error) {
+      return console.error(error.message);
+    }
+    //console.log(results[0]);
+    res.status(200).json(results);
+  });
+});
+
+router.get("/quarterly_sales_report", (req, res) => {
+  var year = req.query.year;
+
+  var sql = `CALL quarterly_sales_report(${year})`;
+
+  database.query(sql, true, (error, results, fields) => {
+    if (error) {
+      return console.error(error.message);
+    }
+    //console.log(results[0]);
+    res.status(200).json(results);
+  });
+});
 module.exports = router;

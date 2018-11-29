@@ -8,6 +8,7 @@ const orders = require("./routes/orders");
 const procedures = require("./routes/procedures");
 const working = require("./routes/working");
 const schedules = require("./routes/schedule");
+const driver = require("./routes/driver");
 const database = require("./database/db");
 
 app.use(bodyParser.json());
@@ -18,6 +19,7 @@ app.use("/orders", orders);
 app.use("/procedure", procedures);
 app.use("/working", working);
 app.use("/schedule", schedules);
+app.use("/driver", driver);
 
 database.connect(function(err) {
   if (err) {
